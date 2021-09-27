@@ -4,6 +4,7 @@ using System.IO;
 
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -16,29 +17,12 @@ namespace Trial_Everywhere
         static void Main(string[] args)
         {
             FirstSetup();
-
-
-            /*
-            Console.Write("Enter a name for the streamer: ");
-            string name = Console.ReadLine();
-            Console.Write("A browser window will open. Further instructions and notifications will appear here.");
-
-            Thread.Sleep(2000);
-
-            SetupTest(name);
-
-            Console.WriteLine();
-            Console.WriteLine();
-            */
         }
         private static void FirstSetup()
         {
             Console.WriteLine("Choose options:");
-            Console.WriteLine("Create an account - 1");
-            Console.WriteLine("Sending a message - 2");
-            Console.WriteLine("Carding subs - 3");
-            Console.WriteLine("Carding bits - 4");
-            Console.WriteLine("Spotify Carding - 5");
+            Console.WriteLine("Spotify Carding - 1");
+            Console.WriteLine("Udemy Carding - 2");
             while (true)
             {
                 Console.Write("set:");
@@ -46,22 +30,12 @@ namespace Trial_Everywhere
 
                 if (userSelection == "1")
                 {
-                    CreateAnAccount();
+                    SpotifyCardingTrial();
                     break;
                 }
                 else if (userSelection == "2")
                 {
-                    break;
-                }
-                else if (userSelection == "3")
-                {
-                    TwtichCardingSubs();
-                    break;
-                }
-                else if (userSelection == "5")
-                {
-                    SpotifyCardingTrial();
-                    break;
+                    UdemyCardingTrial();
                 }
                 else
                 {
@@ -205,6 +179,14 @@ namespace Trial_Everywhere
                 Thread.Sleep(9000);
             }
         }
+        private static void UdemyCardingTrial()
+        {
+            driver = new ChromeDriver();
+            driver.Navigate().GoToUrl("https://www.udemy.com/");
 
+            driver.FindElement(By.Id("login-username")).SendKeys("rather.p.our1.8.6.2@gmail.com");
+            driver.FindElement(By.Id("login-password")).SendKeys("Powerspoti!#2");
+            driver.FindElement(By.Id("login-button")).Click();
+        }
     }
 }
