@@ -39,6 +39,11 @@ namespace Trial_Everywhere
             //IWebDriver driver = new ChromeDriver(); // for testing (open cmd)
 
             driver.Navigate().GoToUrl("http://hbomax.com");
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+
+            driver.FindElement(By.Id("onetrust-accept-btn-handler")).Click();
+
+            driver.Quit();
         }
     }
 }
