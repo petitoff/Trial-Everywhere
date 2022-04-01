@@ -7,6 +7,6 @@
         mc:Ignorable="d"
         Title="HboMax" Height="450" Width="800">
     <Grid>
-        
+        <Label x:Name="headerMain" Content="HBO MAX" HorizontalAlignment="Center" Height="40" Margin="0,25,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="145" FontSize="18"/>
     </Grid>
 </Window>
