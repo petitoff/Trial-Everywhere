@@ -1,0 +1,24 @@
+﻿<Window x:Class="Trial_Everywhere.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Trial_Everywhere"
+        mc:Ignorable="d"
+        Title="Trial Everywhere" Height="450" Width="800">
+
+    <Grid Margin="0,0,0,-6">
+        <Label x:Name="headerMain" Content="Trial Everywhere!" HorizontalAlignment="Center" Height="40" Margin="0,25,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="145" FontSize="18"/>
+        <TabControl HorizontalAlignment="Center" Margin="0,109,0,0" VerticalAlignment="Top" Width="750" Height="276">
+            <TabItem Header="Choose a platform">
+                <Grid Background="#FFE5E5E5">
+                    <Button Content="HBO MAX" HorizontalAlignment="Left" Height="36" Margin="20,20,0,0" VerticalAlignment="Top" Width="104" Click="BtnHboMax"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="TabItem">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Window>
