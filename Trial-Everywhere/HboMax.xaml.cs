@@ -54,15 +54,26 @@ namespace Trial_Everywhere
         private void PlanPickerSelect()
         {
             driver.FindElement(By.Id("onetrust-accept-btn-handler")).Click();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
 
-            try
+            MessageBoxResult result;
+            bool wantAgain = true;
+            while (wantAgain)
             {
-            driver.FindElement(By.XPath(@"/html/body/div[1]/div/div[2]/div/div/div/div[1]/div[2]/button")).Click();
-            }
-            catch(Exception e)
-            {
-
+                try
+                {
+                    driver.FindElement(By.XPath(@"/html/body/div[1]/div/div[2]/div/div/div/div[1]/div[2]/button")).Click();
+                }
+                catch (Exception e)
+                {
+                    result = MessageBox.Show("I did not find a button! Do you want to try again?", "HBO MAX", MessageBoxButton.YesNo);
+                    switch (result)
+                    {
+                        case MessageBoxResult.No:
+                            wantAgain = false;
+                            break;
+                    }
+                }
             }
         }
 
