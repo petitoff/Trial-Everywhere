@@ -68,12 +68,7 @@ namespace Trial_Everywhere
                 catch (Exception e)
                 {
                     result = MessageBox.Show("I did not find a button! Do you want to try again?", "HBO MAX", MessageBoxButton.YesNo);
-                    switch (result)
-                    {
-                        case MessageBoxResult.No:
-                            wantAgain = false;
-                            break;
-                    }
+                    if (result == MessageBoxResult.No) wantAgain = false;
                 }
             }
         }
