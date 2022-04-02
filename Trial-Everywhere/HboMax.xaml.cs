@@ -48,7 +48,9 @@ namespace Trial_Everywhere
             driver.Navigate().GoToUrl("https://www.hbomax.com/subscribe/plan-picker");
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             PlanPickerSelect();
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
 
+            FillingOutForm();
         }
 
         private void PlanPickerSelect()
@@ -71,6 +73,14 @@ namespace Trial_Everywhere
                     if (result == MessageBoxResult.No) wantAgain = false;
                 }
             }
+        }
+
+        private void FillingOutForm()
+        {
+            driver.FindElement(By.Id("firstName")).SendKeys("test");
+            driver.FindElement(By.Id("lastName")).SendKeys("test");
+            driver.FindElement(By.Id("email")).SendKeys("test");
+            driver.FindElement(By.Id("password")).SendKeys("test");
         }
 
         private void CloseSelenium(object sender, RoutedEventArgs e)
