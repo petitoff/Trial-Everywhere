@@ -62,7 +62,7 @@ namespace Trial_Everywhere
         private void CloseSelenium(object sender, RoutedEventArgs e)
         {
             if (!RunningSelenium) return;
-            Thread exiThread = new Thread(CloseSeleniumThread);
+            var exiThread = new Thread(CloseSeleniumThread);
             exiThread.Start();
             RunningSelenium = false;
 
