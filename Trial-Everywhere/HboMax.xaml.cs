@@ -128,6 +128,8 @@ namespace Trial_Everywhere
             _driver.FindElement(By.Id("email")).SendKeys(EmailUser);
             _driver.FindElement(By.Id("password")).Clear();
             _driver.FindElement(By.Id("password")).SendKeys(PassUser);
+
+            _driver.FindElement(By.XPath(@"/html/body/div[1]/div/div[3]/div/div/form/div[4]/div[2]/button")).Click(); // Clicking the button to confirm the entered data
         }
 
     }
