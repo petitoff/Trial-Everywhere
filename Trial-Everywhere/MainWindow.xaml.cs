@@ -27,7 +27,7 @@ namespace Trial_Everywhere
 
         private void BtnHboMax(object sender, RoutedEventArgs e)
         {
-            HboMax hboMax = new HboMax();
+            HboMax hboMax = new HboMax(false);
             hboMax.Show();
         }
     }
