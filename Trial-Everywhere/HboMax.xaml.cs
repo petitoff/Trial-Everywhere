@@ -35,10 +35,20 @@ namespace Trial_Everywhere
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
+
+        }
+
+        private void OpenSelenium(object sender, RoutedEventArgs e)
+        {
             var runSeleniumThread = new Thread(RunSelenium); // create thread with selenium
             driverService.HideCommandPromptWindow = true; // Disabling cmd when run selenium
 
             runSeleniumThread.Start();
+        }
+
+        private void CloseSelenium(object sender, RoutedEventArgs e)
+        {
+            driver.Quit();
         }
 
         private void RunSelenium()
@@ -86,10 +96,6 @@ namespace Trial_Everywhere
             driver.FindElement(By.Id("password")).Clear();
             driver.FindElement(By.Id("password")).SendKeys("test");
         }
-
-        private void CloseSelenium(object sender, RoutedEventArgs e)
-        {
-            driver.Quit();
-        }
+        
     }
 }
