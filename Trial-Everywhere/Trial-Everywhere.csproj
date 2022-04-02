@@ -76,6 +76,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CreditCardNumberGenerator.cs" />
     <Compile Include="HboMax.xaml.cs">
       <DependentUpon>HboMax.xaml</DependentUpon>
     </Compile>
