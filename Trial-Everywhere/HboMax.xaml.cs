@@ -36,6 +36,11 @@ namespace Trial_Everywhere
         public bool RunningSelenium;
         private Thread _runSeleniumThread;
 
+        public string FirstNameUser = "John";
+        public string LastNameUser = "Onion";
+        public string EmailUser = "test@test.com";
+        public string PassUser = "Power132";
+
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
 
@@ -46,28 +51,44 @@ namespace Trial_Everywhere
             _runSeleniumThread = new Thread(RunSelenium); // create thread with selenium
             _driverService.HideCommandPromptWindow = true; // Disabling cmd when run selenium
 
+            if (GetUserCredits())
+            {
+                return;
+            }
+
             _runSeleniumThread.Start();
         }
 
         private void CloseSelenium(object sender, RoutedEventArgs e)
         {
-            RunningSelenium = false;
+            if (!RunningSelenium) return;
             _driver.Quit();
             _runSeleniumThread.Abort();
+            RunningSelenium = false;
+
         }
 
         private void RunSelenium()
         {
             RunningSelenium = true;
+
             _driver = new ChromeDriver(_driverService, new ChromeOptions());
 
             _driver.Navigate().GoToUrl("https://www.hbomax.com/subscribe/plan-picker");
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
 
-            if(RunningSelenium) PlanPickerSelect();
+            if (RunningSelenium) PlanPickerSelect();
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
 
             if (RunningSelenium) FillingOutForm();
+        }
+
+        private bool GetUserCredits()
+        {
+            if (emailLabel.Text != "") EmailUser = emailLabel.Text;
+            var result = MessageBox.Show("Do you want enter a email?", "Email!", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes) return true;
+            return false;
         }
 
         private void PlanPickerSelect()
@@ -95,13 +116,13 @@ namespace Trial_Everywhere
         private void FillingOutForm()
         {
             _driver.FindElement(By.Id("firstName")).Clear();
-            _driver.FindElement(By.Id("firstName")).SendKeys("test");
+            _driver.FindElement(By.Id("firstName")).SendKeys(FirstNameUser);
             _driver.FindElement(By.Id("lastName")).Clear();
-            _driver.FindElement(By.Id("lastName")).SendKeys("test");
+            _driver.FindElement(By.Id("lastName")).SendKeys(LastNameUser);
             _driver.FindElement(By.Id("email")).Clear();
-            _driver.FindElement(By.Id("email")).SendKeys("test");
+            _driver.FindElement(By.Id("email")).SendKeys(EmailUser);
             _driver.FindElement(By.Id("password")).Clear();
-            _driver.FindElement(By.Id("password")).SendKeys("test");
+            _driver.FindElement(By.Id("password")).SendKeys(PassUser);
         }
 
     }
