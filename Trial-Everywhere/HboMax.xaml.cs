@@ -77,9 +77,13 @@ namespace Trial_Everywhere
 
         private void FillingOutForm()
         {
+            driver.FindElement(By.Id("firstName")).Clear();
             driver.FindElement(By.Id("firstName")).SendKeys("test");
+            driver.FindElement(By.Id("lastName")).Clear();
             driver.FindElement(By.Id("lastName")).SendKeys("test");
+            driver.FindElement(By.Id("email")).Clear();
             driver.FindElement(By.Id("email")).SendKeys("test");
+            driver.FindElement(By.Id("password")).Clear();
             driver.FindElement(By.Id("password")).SendKeys("test");
         }
 
