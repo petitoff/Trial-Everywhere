@@ -77,11 +77,11 @@ namespace Trial_Everywhere
             _driver.Navigate().GoToUrl("https://www.hbomax.com/subscribe/plan-picker");
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
 
-            if (RunningSelenium) return;
+            if (!RunningSelenium) return;
             PlanPickerSelect();
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
 
-            if (RunningSelenium) return;
+            if (!RunningSelenium) return;
             FillingOutForm();
         }
 
