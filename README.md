@@ -17,4 +17,4 @@ The program allows you to generate accounts with a trial period for the service 
 
 1. Download the entire repository
 2. Install the .NET version 4.6.1
-3. Run the program using Visual Studio (version 2019 or higher)
+3. Run the program using Visual Studio (version 2017 or higher)
