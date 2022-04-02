@@ -109,7 +109,6 @@ namespace Trial_Everywhere
             _driver.FindElement(By.Id("onetrust-accept-btn-handler")).Click();
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
 
-            MessageBoxResult result;
             bool wantAgain = true;
             while (wantAgain && RunningSelenium)
             {
@@ -122,7 +121,7 @@ namespace Trial_Everywhere
                 {
                     if (RunningSelenium)
                     {
-                        result = MessageBox.Show("I did not find a button! Do you want to try again?", "HBO MAX",
+                        var result = MessageBox.Show("I did not find a button! Do you want to try again?", "HBO MAX",
                             MessageBoxButton.YesNo);
                         if (result == MessageBoxResult.No) wantAgain = false;
                     }
