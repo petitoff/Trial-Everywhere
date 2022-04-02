@@ -31,7 +31,7 @@ namespace Trial_Everywhere
         }
 
         ChromeDriverService driverService = ChromeDriverService.CreateDefaultService(); // Create chrome (selenium) settings
-        private ChromeDriver driver;
+        private ChromeDriver _driver;
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
@@ -48,25 +48,25 @@ namespace Trial_Everywhere
 
         private void CloseSelenium(object sender, RoutedEventArgs e)
         {
-            driver.Quit();
+            _driver.Quit();
         }
 
         private void RunSelenium()
         {
-            driver = new ChromeDriver(driverService, new ChromeOptions());
+            _driver = new ChromeDriver(driverService, new ChromeOptions());
 
-            driver.Navigate().GoToUrl("https://www.hbomax.com/subscribe/plan-picker");
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            _driver.Navigate().GoToUrl("https://www.hbomax.com/subscribe/plan-picker");
+            _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             PlanPickerSelect();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
 
             FillingOutForm();
         }
 
         private void PlanPickerSelect()
         {
-            driver.FindElement(By.Id("onetrust-accept-btn-handler")).Click();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            _driver.FindElement(By.Id("onetrust-accept-btn-handler")).Click();
+            _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
 
             MessageBoxResult result;
             bool wantAgain = true;
@@ -74,7 +74,7 @@ namespace Trial_Everywhere
             {
                 try
                 {
-                    driver.FindElement(By.XPath(@"/html/body/div[1]/div/div[2]/div/div/div/div[1]/div[2]/button")).Click();
+                    _driver.FindElement(By.XPath(@"/html/body/div[1]/div/div[2]/div/div/div/div[1]/div[2]/button")).Click();
                     wantAgain = false;
                 }
                 catch (Exception e)
@@ -87,14 +87,14 @@ namespace Trial_Everywhere
 
         private void FillingOutForm()
         {
-            driver.FindElement(By.Id("firstName")).Clear();
-            driver.FindElement(By.Id("firstName")).SendKeys("test");
-            driver.FindElement(By.Id("lastName")).Clear();
-            driver.FindElement(By.Id("lastName")).SendKeys("test");
-            driver.FindElement(By.Id("email")).Clear();
-            driver.FindElement(By.Id("email")).SendKeys("test");
-            driver.FindElement(By.Id("password")).Clear();
-            driver.FindElement(By.Id("password")).SendKeys("test");
+            _driver.FindElement(By.Id("firstName")).Clear();
+            _driver.FindElement(By.Id("firstName")).SendKeys("test");
+            _driver.FindElement(By.Id("lastName")).Clear();
+            _driver.FindElement(By.Id("lastName")).SendKeys("test");
+            _driver.FindElement(By.Id("email")).Clear();
+            _driver.FindElement(By.Id("email")).SendKeys("test");
+            _driver.FindElement(By.Id("password")).Clear();
+            _driver.FindElement(By.Id("password")).SendKeys("test");
         }
         
     }
