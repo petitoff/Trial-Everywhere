@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,23 +28,31 @@ namespace Trial_Everywhere
         public HboMax()
         {
             InitializeComponent();
-            RunSelenium();
+        }
+
+        ChromeDriverService driverService = ChromeDriverService.CreateDefaultService(); // Create chrome (selenium) settings
+        private ChromeDriver driver;
+
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+            var runSeleniumThread = new Thread(RunSelenium); // create thread with selenium
+            driverService.HideCommandPromptWindow = true; // Disabling cmd when run selenium
+
+            runSeleniumThread.Start();
         }
 
         public void RunSelenium()
         {
-            var driverService = ChromeDriverService.CreateDefaultService();
-            driverService.HideCommandPromptWindow = true; // Disabling cmd when run selenium
+            driver = new ChromeDriver(driverService, new ChromeOptions());
 
-            var driver = new ChromeDriver(driverService, new ChromeOptions());
-
-            //IWebDriver driver = new ChromeDriver(); // for testing (open cmd)
-
-            driver.Navigate().GoToUrl("http://hbomax.com");
+            driver.Navigate().GoToUrl("https://www.hbomax.com/subscribe/plan-picker");
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
 
             driver.FindElement(By.Id("onetrust-accept-btn-handler")).Click();
+        }
 
+        private void CloseSelenium(object sender, RoutedEventArgs e)
+        {
             driver.Quit();
         }
     }
