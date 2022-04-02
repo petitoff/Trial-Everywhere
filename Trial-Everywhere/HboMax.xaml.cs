@@ -100,8 +100,7 @@ namespace Trial_Everywhere
             }
 
             var result = MessageBox.Show("Do you want enter a email?", "Email!", MessageBoxButton.YesNo);
-            if (result == MessageBoxResult.Yes) return true;
-            return false;
+            return result == MessageBoxResult.Yes;
         }
 
         private void PlanPickerSelect()
