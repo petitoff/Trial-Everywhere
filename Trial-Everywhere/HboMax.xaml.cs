@@ -62,10 +62,16 @@ namespace Trial_Everywhere
         private void CloseSelenium(object sender, RoutedEventArgs e)
         {
             if (!RunningSelenium) return;
-            _driver.Quit();
-            _runSeleniumThread.Abort();
+            Thread exiThread = new Thread(CloseSeleniumThread);
+            exiThread.Start();
             RunningSelenium = false;
 
+        }
+
+        private void CloseSeleniumThread()
+        {
+            _runSeleniumThread.Abort();
+            _driver.Quit();
         }
 
         private void RunSelenium()
@@ -114,8 +120,12 @@ namespace Trial_Everywhere
                 }
                 catch (Exception e)
                 {
-                    result = MessageBox.Show("I did not find a button! Do you want to try again?", "HBO MAX", MessageBoxButton.YesNo);
-                    if (result == MessageBoxResult.No) wantAgain = false;
+                    if (RunningSelenium)
+                    {
+                        result = MessageBox.Show("I did not find a button! Do you want to try again?", "HBO MAX",
+                            MessageBoxButton.YesNo);
+                        if (result == MessageBoxResult.No) wantAgain = false;
+                    }
                 }
             }
         }
