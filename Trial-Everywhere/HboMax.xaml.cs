@@ -41,14 +41,21 @@ namespace Trial_Everywhere
             runSeleniumThread.Start();
         }
 
-        public void RunSelenium()
+        private void RunSelenium()
         {
             driver = new ChromeDriver(driverService, new ChromeOptions());
 
             driver.Navigate().GoToUrl("https://www.hbomax.com/subscribe/plan-picker");
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            PlanPickerSelect();
+            
+        }
 
+        private void PlanPickerSelect()
+        {
             driver.FindElement(By.Id("onetrust-accept-btn-handler")).Click();
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            driver.FindElement(By.XPath(@"/html/body/div[1]/div/div[2]/div/div/div/div[1]/div[2]/button")).Click();
         }
 
         private void CloseSelenium(object sender, RoutedEventArgs e)
