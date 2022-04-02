@@ -5,7 +5,7 @@
 The program allows you to generate accounts with a trial period for the service requiring payment cards.
 
 ### Currently, the program supports websites:
-✔ HBO MAX
+❌ HBO MAX
 
 ## Tools and information
 - C# .NET 6.0.1
