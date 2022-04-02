@@ -48,14 +48,35 @@ namespace Trial_Everywhere
             driver.Navigate().GoToUrl("https://www.hbomax.com/subscribe/plan-picker");
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             PlanPickerSelect();
+<<<<<<< Updated upstream
             
         }
 
+=======
+
+        }
+
+>>>>>>> Stashed changes
         private void PlanPickerSelect()
         {
             driver.FindElement(By.Id("onetrust-accept-btn-handler")).Click();
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+<<<<<<< Updated upstream
             driver.FindElement(By.XPath(@"/html/body/div[1]/div/div[2]/div/div/div/div[1]/div[2]/button")).Click();
+=======
+
+            bool wantAgain = true;
+
+            while(wantAgain)
+            try
+            {
+                driver.FindElement(By.XPath(@"/html/body/div[1]/div/div[2]/div/div/div/div[1]/div[2]")).Click();
+            }
+            catch(Exception e)
+            {
+                
+            }
+>>>>>>> Stashed changes
         }
 
         private void CloseSelenium(object sender, RoutedEventArgs e)
