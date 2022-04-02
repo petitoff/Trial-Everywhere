@@ -8,12 +8,13 @@ namespace Trial_Everywhere
 {
     internal class CreditCardNumberGenerator
     {
-        public CreditCardNumberGenerator()
+        public CreditCardNumberGenerator(string CardNumberPrefix)
         {
-
+            this.cardNumberPrefix = CardNumberPrefix;
         }
+        private string cardNumberPrefix;
 
-        public string GetCreditCardNumbers(string prefix)
+        public string GetCreditCardNumbers()
         {
             return null;
         }
