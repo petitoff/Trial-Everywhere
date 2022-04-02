@@ -25,13 +25,16 @@ namespace Trial_Everywhere
     /// </summary>
     public partial class HboMax : Window
     {
-        public HboMax()
+        public HboMax(bool runningSelenium)
         {
+            this.RunningSelenium = runningSelenium;
             InitializeComponent();
         }
 
         private readonly ChromeDriverService _driverService = ChromeDriverService.CreateDefaultService(); // Create chrome (selenium) settings
         private ChromeDriver _driver;
+        public bool RunningSelenium;
+        private Thread _runSeleniumThread;
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
@@ -40,27 +43,31 @@ namespace Trial_Everywhere
 
         private void OpenSelenium(object sender, RoutedEventArgs e)
         {
-            var runSeleniumThread = new Thread(RunSelenium); // create thread with selenium
+            _runSeleniumThread = new Thread(RunSelenium); // create thread with selenium
             _driverService.HideCommandPromptWindow = true; // Disabling cmd when run selenium
 
-            runSeleniumThread.Start();
+            _runSeleniumThread.Start();
         }
 
         private void CloseSelenium(object sender, RoutedEventArgs e)
         {
+            RunningSelenium = false;
             _driver.Quit();
+            _runSeleniumThread.Abort();
         }
 
         private void RunSelenium()
         {
+            RunningSelenium = true;
             _driver = new ChromeDriver(_driverService, new ChromeOptions());
 
             _driver.Navigate().GoToUrl("https://www.hbomax.com/subscribe/plan-picker");
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-            PlanPickerSelect();
+
+            if(RunningSelenium) PlanPickerSelect();
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
 
-            FillingOutForm();
+            if (RunningSelenium) FillingOutForm();
         }
 
         private void PlanPickerSelect()
@@ -70,7 +77,7 @@ namespace Trial_Everywhere
 
             MessageBoxResult result;
             bool wantAgain = true;
-            while (wantAgain)
+            while (wantAgain && RunningSelenium)
             {
                 try
                 {
@@ -96,6 +103,6 @@ namespace Trial_Everywhere
             _driver.FindElement(By.Id("password")).Clear();
             _driver.FindElement(By.Id("password")).SendKeys("test");
         }
-        
+
     }
 }
