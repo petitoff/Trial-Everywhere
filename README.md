@@ -8,7 +8,7 @@ The program allows you to generate accounts with a trial period for the service 
 ❌ HBO MAX
 
 ## Tools and information
-- C# .NET 6.0.1
+- C# .NET 4.6.1
   - WPF (Windows Presentation Foundation)  
 - Selenium
 
@@ -16,5 +16,5 @@ The program allows you to generate accounts with a trial period for the service 
 > Currently, the program is under development. If it does receive a released version, it will be convenient to download.
 
 1. Download the entire repository
-2. Install the .NET version 6.0.1
+2. Install the .NET version 4.6.1
 3. Run the program using Visual Studio (version 2019 or higher)
