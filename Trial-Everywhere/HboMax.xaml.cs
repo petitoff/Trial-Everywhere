@@ -83,12 +83,15 @@ namespace Trial_Everywhere
             _driver.Navigate().GoToUrl("https://www.hbomax.com/subscribe/plan-picker");
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
 
-            if (!RunningSelenium) return;
+            //if (!RunningSelenium) return;
             PlanPickerSelect();
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
 
-            if (!RunningSelenium) return;
+            //if (!RunningSelenium) return;
             FillingOutForm();
+
+            //if (!RunningSelenium) return;
+            FillingOutPaymentMethod();
         }
 
         private bool GetUserCredits()
@@ -142,5 +145,9 @@ namespace Trial_Everywhere
             _driver.FindElement(By.XPath(@"/html/body/div[1]/div/div[3]/div/div/form/div[4]/div[2]/button")).Click(); // Clicking the button to confirm the entered data
         }
 
+        private void FillingOutPaymentMethod()
+        {
+            _driver.FindElement(By.XPath(@"/html/body/div[1]/div/div[3]/div/div/div/div[2]/div/div[1]/label"));
+        }
     }
 }
