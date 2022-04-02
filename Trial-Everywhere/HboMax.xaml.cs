@@ -30,7 +30,7 @@ namespace Trial_Everywhere
             InitializeComponent();
         }
 
-        ChromeDriverService driverService = ChromeDriverService.CreateDefaultService(); // Create chrome (selenium) settings
+        private readonly ChromeDriverService _driverService = ChromeDriverService.CreateDefaultService(); // Create chrome (selenium) settings
         private ChromeDriver _driver;
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
@@ -41,7 +41,7 @@ namespace Trial_Everywhere
         private void OpenSelenium(object sender, RoutedEventArgs e)
         {
             var runSeleniumThread = new Thread(RunSelenium); // create thread with selenium
-            driverService.HideCommandPromptWindow = true; // Disabling cmd when run selenium
+            _driverService.HideCommandPromptWindow = true; // Disabling cmd when run selenium
 
             runSeleniumThread.Start();
         }
@@ -53,7 +53,7 @@ namespace Trial_Everywhere
 
         private void RunSelenium()
         {
-            _driver = new ChromeDriver(driverService, new ChromeOptions());
+            _driver = new ChromeDriver(_driverService, new ChromeOptions());
 
             _driver.Navigate().GoToUrl("https://www.hbomax.com/subscribe/plan-picker");
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
