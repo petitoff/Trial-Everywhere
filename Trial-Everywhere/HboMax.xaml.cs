@@ -85,7 +85,12 @@ namespace Trial_Everywhere
 
         private bool GetUserCredits()
         {
-            if (emailLabel.Text != "") EmailUser = emailLabel.Text;
+            if (emailLabel.Text != "")
+            {
+                EmailUser = emailLabel.Text;
+                return false;
+            }
+
             var result = MessageBox.Show("Do you want enter a email?", "Email!", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes) return true;
             return false;
