@@ -111,15 +111,6 @@ namespace Trial_Everywhere
 
             if (creditCardNumberTextBox.Text != "")
             {
-                try
-                {
-                    Convert.ToInt32(creditCardNumberTextBox.Text);
-                }
-                catch
-                {
-                    MessageBox.Show("Enter only numbers!", "Card Number!");
-                    return true;
-                }
                 CardNumberPrefix = creditCardNumberTextBox.Text;
             }
             else
