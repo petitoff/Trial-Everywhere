@@ -163,9 +163,31 @@ namespace Trial_Everywhere
 
         private void FillingOutPaymentMethod()
         {
-            //var cardNumberGenerator = new CreditCardNumberGenerator();
+            var cardNumberGenerator = new CreditCardNumberGenerator(CardNumberPrefix);
+            cardNumberGenerator.GetCreditCardNumbers(10);
 
-            _driver.FindElement(By.XPath(@"/html/body/div[1]/div/div[3]/div/div/div/div[2]/div/div[1]/label"));
+            _driver.FindElement(By.XPath(@"/html/body/div[1]/div/div[3]/div/div/div/div[2]/div/div[1]/label")).Click(); // click option of paymant
+            _driver.FindElement(By.Id("cardHolderNameField")).Clear();
+            _driver.FindElement(By.Id("cardHolderNameField")).SendKeys($"{FirstNameUser} {LastNameUser}");
+
+            _driver.SwitchTo().Frame(_driver.FindElement(By.XPath(@"/html/body/div[1]/div/div[3]/div/div/div/div[2]/div/div[1]/div/form/div[2]/div[1]/div/iframe"))); // change iframe
+
+            _driver.FindElement(By.Id("card_number")).Clear();
+            _driver.FindElement(By.Id("card_number")).SendKeys("123456789123456");
+            _driver.SwitchTo().DefaultContent();
+
+            _driver.FindElement(By.Id("cardExpiryDateField")).Clear();
+            _driver.FindElement(By.Id("cardExpiryDateField")).SendKeys("1234");
+
+            _driver.SwitchTo().Frame(_driver.FindElement(By.XPath(@"/html/body/div[1]/div/div[3]/div/div/div/div[2]/div/div[1]/div/form/div[3]/div[2]/div[1]/div[1]/iframe"))); // change iframe
+
+            _driver.FindElement(By.Id("cvv")).Clear();
+            _driver.FindElement(By.Id("cvv")).SendKeys("123");
+
+            _driver.SwitchTo().DefaultContent();
+
+
+            _driver.FindElement(By.Id("savePaymentMethod")).Click();
         }
     }
 }
