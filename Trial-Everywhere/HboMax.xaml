@@ -5,13 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Trial_Everywhere"
         mc:Ignorable="d"
+        ResizeMode="NoResize"
         Title="HboMax" Height="450" Width="800">
     <Grid Loaded="Grid_Loaded">
         <Label x:Name="headerMain" Content="HBO MAX" HorizontalAlignment="Center" Height="40" Margin="0,25,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="145" FontSize="18"/>
-        <Button Content="Close Selenium" HorizontalAlignment="Center" Height="36" Margin="0,366,0,0" VerticalAlignment="Top" Width="104" Click="CloseSelenium"/>
         <Label Content="Instruction&#xD;&#xA;&#xD;&#xA;1. Start VPN with US servers&#xD;&#xA;2. Prepare the starting card numbers&#xD;&#xA;3. Prepare a working email" HorizontalAlignment="Left" Height="95" Margin="24,70,0,0" VerticalAlignment="Top" Width="211"/>
+        <Button Content="Close Selenium" HorizontalAlignment="Center" Height="36" Margin="0,366,0,0" VerticalAlignment="Top" Width="104" Click="CloseSelenium"/>
+        <Button Content="Open Selenium" HorizontalAlignment="Left" Height="36" Margin="218,366,0,0" VerticalAlignment="Top" Width="104" Click="OpenSelenium"/>
         <TextBox x:Name="emailLabel" HorizontalAlignment="Left" Height="30" Margin="618,111,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="147" TextAlignment="Center"/>
         <Label Content="Enter email:" HorizontalAlignment="Left" Height="30" Margin="509,111,0,0" VerticalAlignment="Top" Width="88"/>
-        <Button Content="Open Selenium" HorizontalAlignment="Left" Height="36" Margin="218,366,0,0" VerticalAlignment="Top" Width="104" Click="OpenSelenium"/>
+        <TextBox x:Name="creditCardNumberTextBox" HorizontalAlignment="Left" Height="30" Margin="618,165,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="147" TextAlignment="Center"/>
+        <Label Content="Enter Card Number" HorizontalAlignment="Left" Height="30" Margin="484,165,0,0" VerticalAlignment="Top" Width="113"/>
     </Grid>
 </Window>
