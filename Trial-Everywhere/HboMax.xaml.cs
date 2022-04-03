@@ -41,6 +41,8 @@ namespace Trial_Everywhere
         public string EmailUser = "test@test.com";
         public string PassUser = "Power132";
 
+        public string CardNumberPrefix;
+
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
 
@@ -48,6 +50,7 @@ namespace Trial_Everywhere
 
         private void OpenSelenium(object sender, RoutedEventArgs e)
         {
+            if (RunningSelenium) return;
             _runSeleniumThread = new Thread(RunSelenium); // create thread with selenium
             _driverService.HideCommandPromptWindow = true; // Disabling cmd when run selenium
 
@@ -89,21 +92,43 @@ namespace Trial_Everywhere
 
             //if (!RunningSelenium) return;
             FillingOutForm();
-
+            MessageBox.Show("Test");
             //if (!RunningSelenium) return;
             FillingOutPaymentMethod();
         }
 
         private bool GetUserCredits()
         {
-            if (emailLabel.Text != "")
+            if (emaiTextBox.Text != "")
             {
-                EmailUser = emailLabel.Text;
-                return false;
+                EmailUser = emaiTextBox.Text;
+            }
+            else
+            {
+                var result = MessageBox.Show("Do you want enter a email?", "Email!", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes) return true;
             }
 
-            var result = MessageBox.Show("Do you want enter a email?", "Email!", MessageBoxButton.YesNo);
-            return result == MessageBoxResult.Yes;
+            if (creditCardNumberTextBox.Text != "")
+            {
+                try
+                {
+                    Convert.ToInt32(creditCardNumberTextBox.Text);
+                }
+                catch
+                {
+                    MessageBox.Show("Enter only numbers!", "Card Number!");
+                    return true;
+                }
+                CardNumberPrefix = creditCardNumberTextBox.Text;
+            }
+            else
+            {
+                MessageBox.Show("Enter a card number!", "Card Number!");
+                return true;
+            }
+
+            return false;
         }
 
         private void PlanPickerSelect()
@@ -142,12 +167,14 @@ namespace Trial_Everywhere
             _driver.FindElement(By.Id("password")).Clear();
             _driver.FindElement(By.Id("password")).SendKeys(PassUser);
 
-            _driver.FindElement(By.XPath(@"/html/body/div[1]/div/div[3]/div/div/form/div[4]/div[2]/button")).Click(); // Clicking the button to confirm the entered data
+            //_driver.FindElement(By.XPath(@"/html/body/div[1]/div/div[3]/div/div/form/div[4]/div[2]/button")).Click(); // Clicking the button to confirm the entered data
         }
 
         private void FillingOutPaymentMethod()
         {
-            _driver.FindElement(By.XPath(@"/html/body/div[1]/div/div[3]/div/div/div/div[2]/div/div[1]/label"));
+            //CreditCardNumberGenerator creditCardNumberGenerator = new CreditCardNumberGenerator();
+
+            _driver.FindElement(By.XPath(@"/html/body/div[1]/div/div[3]/div/div/div/div[2]/div/div[1]/label")).Click();
         }
     }
 }
