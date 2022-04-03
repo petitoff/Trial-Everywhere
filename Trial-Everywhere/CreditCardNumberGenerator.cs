@@ -26,7 +26,7 @@ namespace Trial_Everywhere
             while (CardNumberFoundList.Count < howMany)
             {
                 string prefix = "";
-                for (int i = 0; i < 6; i++)
+                for (int i = 0; i < howMushIsMissing; i++)
                 {
                     prefix += rnd.Next(0, 9).ToString();
                 }
