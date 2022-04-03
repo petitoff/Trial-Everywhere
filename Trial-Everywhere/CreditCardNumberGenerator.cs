@@ -6,36 +6,72 @@ namespace Trial_Everywhere
 {
     internal class CreditCardNumberGenerator
     {
+        public List<string> CardNumberFoundList = new List<string>();
+
         public CreditCardNumberGenerator(string CardNumberPrefix)
         {
             this.cardNumberPrefix = CardNumberPrefix;
         }
         private string cardNumberPrefix;
 
-        public string GetCreditCardNumbers()
+        public void GetCreditCardNumbers(int howMany)
         {
-            return null;
+            int checkLength = cardNumberPrefix.Length;
+            int howMushIsMissing = 16 - checkLength;
+
+            if (howMushIsMissing > 6) return;
+
+            Random rnd = new Random();
+
+            while (CardNumberFoundList.Count < howMany)
+            {
+                string prefix = "";
+                for (int i = 0; i < 6; i++)
+                {
+                    prefix += rnd.Next(0, 9).ToString();
+                }
+
+                if (IsValidCreditCardNumber(cardNumberPrefix + prefix))
+                {
+                    CardNumberFoundList.Add(cardNumberPrefix + prefix);
+                }
+            }
         }
 
-        private bool IsValidCreditCardNumber(string creditCardNumber)
+        private bool IsValidCreditCardNumber(string cardNumber)
         {
             //string creditCard = "5297501100132586";
-            List<int> creditCardList = creditCardNumber.Select(i => Convert.ToInt32(i.ToString())).ToList();
+            return SumAllNumber(cardNumber) == 0;
+        }
+
+        private int SumAllNumber(string cardNumber)
+        {
+            List<int> cardNumberList = cardNumber.Select(i => Convert.ToInt32(i.ToString())).ToList();
 
             int sumAllNumbers = 0;
-            for (int i = 0; i < creditCardList.Count(); i++)
+            for (int i = 0; i < cardNumberList.Count(); i++)
             {
+
                 if (i % 2 == 0)
                 {
-                    sumAllNumbers += creditCardList[i] * 2;
+                    string result = (cardNumberList[i] * 2).ToString();
+                    if (result.Length == 2)
+                    {
+                        sumAllNumbers += Convert.ToInt32(result[0].ToString()) + Convert.ToInt32(result[1].ToString());
+                    }
+                    else
+                    {
+                        sumAllNumbers += Convert.ToInt32(result);
+
+                    }
                 }
                 else
                 {
-                    sumAllNumbers += creditCardNumber[i];
+                    sumAllNumbers += cardNumberList[i];
                 }
             }
 
-            return sumAllNumbers % 10 == 0;
+            return sumAllNumbers % 10;
         }
 
         private string ReverseString(string text)
