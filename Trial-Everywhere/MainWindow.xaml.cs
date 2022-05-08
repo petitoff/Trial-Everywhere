@@ -30,5 +30,11 @@ namespace Trial_Everywhere
             HboMax hboMax = new HboMax(false);
             hboMax.Show();
         }
+
+        private void BtnSpotify(object sender, RoutedEventArgs e)
+        {
+            Spotify spotify = new Spotify(false);
+            spotify.Show();
+        }
     }
 }
