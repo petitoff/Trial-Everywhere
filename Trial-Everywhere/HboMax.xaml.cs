@@ -124,15 +124,23 @@ namespace Trial_Everywhere
 
         private void PlanPickerSelect()
         {
+            try
+            {
             _driver.FindElement(By.Id("onetrust-accept-btn-handler")).Click();
-            _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            }
+            catch
+            {
+
+            }
+
+            //_driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
 
             bool wantAgain = true;
             while (wantAgain && RunningSelenium)
             {
                 try
                 {
-                    _driver.FindElement(By.XPath(@"/html/body/div[1]/div/div[2]/div/div/div/div[1]/div[2]/button")).Click();
+                    _driver.FindElement(By.XPath(@"/html/body/div[1]/div/div[2]/div/div/div[2]/div/div[2]/div/div/div/div[3]/div")).Click();
                     wantAgain = false;
                 }
                 catch (Exception)
@@ -164,20 +172,30 @@ namespace Trial_Everywhere
         private void FillingOutPaymentMethod()
         {
             var cardNumberGenerator = new CreditCardNumberGenerator(CardNumberPrefix);
+            Random rnd = new Random();
+
             cardNumberGenerator.GetCreditCardNumbers(10);
 
+            try
+            {
             _driver.FindElement(By.XPath(@"/html/body/div[1]/div/div[3]/div/div/div/div[2]/div/div[1]/label")).Click(); // click option of paymant
+            }
+            catch
+            {
+
+            }
+
             _driver.FindElement(By.Id("cardHolderNameField")).Clear();
             _driver.FindElement(By.Id("cardHolderNameField")).SendKeys($"{FirstNameUser} {LastNameUser}");
 
             _driver.SwitchTo().Frame(_driver.FindElement(By.XPath(@"/html/body/div[1]/div/div[3]/div/div/div/div[2]/div/div[1]/div/form/div[2]/div[1]/div/iframe"))); // change iframe
 
             _driver.FindElement(By.Id("card_number")).Clear();
-            _driver.FindElement(By.Id("card_number")).SendKeys("123456789123456");
+            _driver.FindElement(By.Id("card_number")).SendKeys(cardNumberGenerator.CardNumberFoundList[0]);
             _driver.SwitchTo().DefaultContent();
 
             _driver.FindElement(By.Id("cardExpiryDateField")).Clear();
-            _driver.FindElement(By.Id("cardExpiryDateField")).SendKeys("1234");
+            _driver.FindElement(By.Id("cardExpiryDateField")).SendKeys("0824");
 
             _driver.SwitchTo().Frame(_driver.FindElement(By.XPath(@"/html/body/div[1]/div/div[3]/div/div/div/div[2]/div/div[1]/div/form/div[3]/div[2]/div[1]/div[1]/iframe"))); // change iframe
 
